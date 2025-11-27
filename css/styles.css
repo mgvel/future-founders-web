@@ -1,0 +1,24 @@
+:root {
+  --primary-color: #E04F00;
+  --secondary-color: #333;
+  --spacing-unit: 16px;
+  --border-radius: 8px;
+  --font-family: 'Inter', sans-serif;
+}
+
+.hero {
+background-image: 
+    url('../images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card {
+  border: 2px solid var(--primary-color);
+  margin: var(--spacing-unit);
+  background-color: #E04F00;
+  margin: 24px;
+  padding: 12px;
+}
+
