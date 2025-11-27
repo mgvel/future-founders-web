@@ -1,0 +1,11 @@
+{% extends 'store/base.html' %}
+{% block title %}Order placed - My Shop{% endblock %}
+
+{% block content %}
+  <div class="bg-white p-8 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">Thank you — your order is placed</h1>
+    <p class="mb-2">Order number: <strong>#{{ order.pk }}</strong></p>
+    <p class="mb-4">Total: ₹ {{ order.total }}</p>
+    <a href="{% url 'store:product-list' %}" class="px-4 py-2 border rounded">Continue shopping</a>
+  </div>
+{% endblock %}

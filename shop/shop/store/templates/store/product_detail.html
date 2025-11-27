@@ -1,0 +1,27 @@
+{% extends 'store/base.html' %}
+{% block title %}{{ object.name }} - My Shop{% endblock %}
+
+{% block content %}
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="md:col-span-2">
+      {% if object.images.first %}
+        <img src="{{ object.images.first.image.url }}" alt="{{ object.name }}" class="w-full h-96 object-cover">
+      {% else %}
+        <div class="w-full h-96 bg-gray-100 flex items-center justify-center">No Image</div>
+      {% endif %}
+    </div>
+    <div>
+      <h1 class="text-2xl font-bold">{{ object.name }}</h1>
+      <p class="mt-4 text-gray-700">{{ object.description }}</p>
+      <p class="mt-4 text-xl font-semibold">₹ {{ object.price }}</p>
+      <p class="mt-2 text-sm text-gray-600">{% if object.stock > 0 %}In stock{% else %}Out of stock{% endif %}</p>
+
+      <form action="{% url 'store:cart-add' object.pk %}" method="post" class="mt-4">
+        {% csrf_token %}
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+        <button type="submit" class="ml-2 px-4 py-2 border rounded">Add to cart</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

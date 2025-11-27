@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+{% block title %} Products - My Shop{% endblock %}
+
+{% block content %}
+  <h1 class="text-2xl font-semibold mb-6">Products</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for product in object_list %}
+      <div class="bg-white border rounded p-4 flex flex-col">
+        {% if product.images.first %}
+          <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="h-48 object-cover mb-4 w-full">
+        {% else %}
+          <div class="h-48 bg-gray-100 mb-4 flex items-center justify-center">No image</div>
+        {% endif %}
+        <h2 class="text-lg font-medium">{{ product.name }}</h2>
+        <p class="mt-2 text-gray-700">₹ {{ product.price }}</p>
+        <div class="mt-auto">
+          <a href="{% url 'store:product-detail' product.slug %}" class="bg-sky-500 hover:bg-indigo-600 hover:text-white text-sm inline-block mt-4 px-4 py-2 border rounded">View</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>No products found.</p>
+    {% endfor %}
+  </div>
+
+  {% if is_paginated %}
+    <div class="mt-6">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 border rounded">Prev</a>
+      {% endif %}
+      <span class="mx-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 border rounded">Next</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}
